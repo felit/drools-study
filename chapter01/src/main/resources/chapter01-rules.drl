@@ -1,0 +1,18 @@
+package com.felit.chapter01
+import java.util.Date
+declare Requirement
+   title: String
+   content: String
+   handled_at: Date
+   created_at: Date
+   last_updated: Date
+end
+
+rule "the requirements to handle"
+dialect "java"
+when
+    $r : Requirement()
+then
+   System.out.println($r + "");
+   retract($r)
+end
