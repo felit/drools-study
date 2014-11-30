@@ -7,7 +7,6 @@ import org.drools.builder.KnowledgeBuilderConfiguration;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.definition.type.FactType;
-import org.drools.io.ResourceFactory;
 import org.drools.io.impl.ClassPathResource;
 import org.drools.runtime.Environment;
 import org.drools.runtime.KnowledgeSessionConfiguration;
@@ -17,7 +16,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.Date;
 
 /**
@@ -54,14 +52,13 @@ public class FactTest {
         factType.set(requirement, "handled_at", new Date());
         factType.set(requirement, "created_at", new Date());
         factType.set(requirement, "last_updated", new Date());
+
         // add the fact to knowledgeSession
         ksession.insert(requirement);
-
         int rulesNum = ksession.fireAllRules();
 
         System.out.println(rulesNum);
         Assert.assertEquals(ksession.getObjects().size(), 0);
-
     }
 
     @AfterTest

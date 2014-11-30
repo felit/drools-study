@@ -14,5 +14,8 @@ when
     $r : Requirement()
 then
    System.out.println($r + "");
+   // Retraction is the removal of a fact from Working Memory,
+   // which means that it will no longer track and match that fact,
+   // and any rules that are activated and dependent on that fact will be cancelled.
    retract($r)
 end
