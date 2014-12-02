@@ -1,4 +1,4 @@
-package com.felit.chapter01.test;
+package com.felit.drools.chapter01.test;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -42,7 +42,7 @@ public class FactTest {
         StatefulKnowledgeSession ksession = this.knowledgeBase.newStatefulKnowledgeSession(sessionConfiguration, env);
 
         // get the class of Fact
-        FactType factType = this.knowledgeBase.getFactType("com.felit.chapter01", "Requirement");
+        FactType factType = this.knowledgeBase.getFactType("com.felit.drools.chapter01", "Requirement");
         Assert.assertNotNull(factType);
 
         // instance the Fact
@@ -74,6 +74,11 @@ public class FactTest {
         // create KnowledgeBuilder
         KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder(builderConfiguration);
         builder.add(new ClassPathResource("chapter01-rules.drl", getClass()), ResourceType.DRL);
+
+        if (builder.hasErrors()) {
+            System.out.println(builder.getErrors());
+            builder.undo();
+        }
 
         // create KnowledgeBase
         KnowledgeBase knowledgeBase = builder.newKnowledgeBase();
