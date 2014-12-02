@@ -1,4 +1,4 @@
-package com.felit.chapter01
+package com.felit.drools.chapter01
 import java.util.Date
 declare Requirement
    title: String
