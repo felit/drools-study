@@ -13,7 +13,12 @@
     <bpmn2:scriptTask id="ScriptTask_1" name="Script Task 1" scriptFormat="http://www.java.com/java">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-      <bpmn2:script>System.out.println(&quot;hello Simple Process&quot;);</bpmn2:script>
+      <bpmn2:script>
+          System.out.println(&quot;hello Simple Process&quot;);
+          System.out.println(kcontext.getVariable("title"));
+          kcontext.setVariable("title",new java.util.Date());
+          System.out.println(kcontext.getVariable("title"));
+      </bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" name="" sourceRef="ScriptTask_1" targetRef="EndEvent_1"/>
     <bpmn2:endEvent id="EndEvent_1" name="">
