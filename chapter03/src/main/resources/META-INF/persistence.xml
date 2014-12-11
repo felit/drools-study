@@ -54,5 +54,18 @@
             <property name="hibernate.transaction.manager_lookup_class"
                       value="org.hibernate.transaction.BTMTransactionManagerLookup"/>
         </properties>
+        <!--<properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://192.168.234.146:5432/jbpm"/>
+            <property name="hibernate.connection.username" value="jbpm"/>
+            <property name="hibernate.connection.password" value="admini"/>
+            <property name="hibernate.connection.autocommit" value="false"/>
+            <property name="hibernate.max_fetch_depth" value="3"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.transaction.manager_lookup_class"
+                      value="org.hibernate.transaction.BTMTransactionManagerLookup"/>
+        </properties>-->
     </persistence-unit>
 </persistence>
