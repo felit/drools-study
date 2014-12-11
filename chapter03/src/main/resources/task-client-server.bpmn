@@ -14,7 +14,7 @@
         <startEvent id="start"></startEvent>
         <userTask id="manual-task" name="Manual Task" tns:taskName="manual-task">
             <potentialOwner name="jbpm-test2" xsi:type="tPotentialOwner">
-                <resourceAssignmentExpression >
+                <resourceAssignmentExpression>
                     <formalExpression>jbpm-test2</formalExpression>
                 </resourceAssignmentExpression>
             </potentialOwner>
