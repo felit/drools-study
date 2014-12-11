@@ -32,7 +32,7 @@ public class HumanTaskMain {
         TaskService ts = new TaskService(Persistence.createEntityManagerFactory(Constants.JPA_PERSISTENCE_UNIT), SystemEventListenerFactory.getSystemEventListener());
         LocalTaskService taskService = new LocalTaskService(ts);
         LocalHTWorkItemHandler taskHandler = new LocalHTWorkItemHandler(taskService, knowledgeSession);
-        knowledgeSession.getWorkItemManager().registerWorkItemHandler("Manual Task", taskHandler);
+        knowledgeSession.getWorkItemManager().registerWorkItemHandler("Human Task", taskHandler);
         ProcessInstance instance = knowledgeSession.createProcessInstance("com.felit.drools.chapter03.humanTask",null);
         knowledgeSession.startProcessInstance(instance.getId());
         knowledgeSession.dispose();

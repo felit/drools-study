@@ -12,14 +12,13 @@
              xmlns:tns="http://www.jboss.org/jbossws-tools">
     <process id="com.felit.drools.chapter03.humanTask" processType="Private" isExecutable="true" name="human task">
         <startEvent id="start"></startEvent>
-        <manualTask id="manual-task" name="Manual Task" tns:taskName="manual-task">
-            <potentialOwner>
-                <resourceAssignmentExpression>
-                    <!--<formalExpression>jbpm-test2</formalExpression>-->
-                    <expression>jbpm-test2</expression>
+        <userTask id="manual-task" name="Manual Task" tns:taskName="manual-task">
+            <potentialOwner name="jbpm-test2" xsi:type="tPotentialOwner">
+                <resourceAssignmentExpression >
+                    <formalExpression>jbpm-test2</formalExpression>
                 </resourceAssignmentExpression>
             </potentialOwner>
-        </manualTask>
+        </userTask>
         <endEvent id="end">
             <terminateEventDefinition/>
         </endEvent>
