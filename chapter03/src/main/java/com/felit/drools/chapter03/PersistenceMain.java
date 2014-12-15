@@ -30,7 +30,9 @@ public class PersistenceMain {
         env.set(EnvironmentName.ENTITY_MANAGER_FACTORY,emf);
         env.set(EnvironmentName.TRANSACTION_MANAGER,tm);
         kbase.newStatefulKnowledgeSession();
+
         StatefulKnowledgeSession ksession = JPAKnowledgeService.newStatefulKnowledgeSession(kbase,null,env);
+//        StatefulKnowledgeSession persistKsession = JPAKnowledgeService.loadStatefulKnowledgeSession(6, kbase, null, env);
         ksession.startProcess("com.felit.drools.chapter03.SimplePersistenceProcess");
         ksession.fireAllRules();
         ksession.dispose();

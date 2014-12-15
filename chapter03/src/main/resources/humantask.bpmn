@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd
+             http://www.jboss.org/drools http://www.jboss.org/drools/drools.xsd"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/jbossws-tools" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <resource name="employee" id="employee"/>
+    <process id="com.felit.drools.chapter03.humanTask" processType="Private" isExecutable="true" name="human task">
+        <startEvent id="start" name="start"></startEvent>
+        <manualTask id="manual-task" name="Manual Task" tns:taskName="manual-task">
+            <potentialOwner name="jbpm-test2">
+                <resourceAssignmentExpression>
+                    <formalExpression>jbpm-test2</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+            <auditing/>
+            <monitoring></monitoring>
+        </manualTask>
+        <endEvent id="end" name="end">
+            <terminateEventDefinition/>
+        </endEvent>
+        <sequenceFlow sourceRef="start" targetRef="manual-task"/>
+        <sequenceFlow sourceRef="manual-task" targetRef="end"/>
+    </process>
+</definitions>

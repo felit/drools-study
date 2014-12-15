@@ -25,7 +25,7 @@ public class TaskClientMain {
 
         for (TaskSummary taskSummary : tasks) {
             System.out.println(taskSummary);
-//            localTaskService.start(taskSummary.getId(), "jbpm-test2");
+            localTaskService.start(taskSummary.getId(), "jbpm-test2");
 //            localTaskService.claim(taskSummary.getId(), "jbpm-test2");
             localTaskService.complete(taskSummary.getId(), "jbpm-test2",null);
 //            localTaskService.delegate(taskSummary.getId(),"Administrator","jbpm-test2");

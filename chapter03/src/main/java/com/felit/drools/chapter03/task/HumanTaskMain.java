@@ -14,6 +14,8 @@ import org.drools.runtime.Environment;
 import org.drools.runtime.EnvironmentName;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.process.ProcessInstance;
+import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
+import org.jbpm.process.audit.WorkingMemoryDbLogger;
 import org.jbpm.process.workitem.wsht.LocalHTWorkItemHandler;
 import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.local.LocalTaskService;
@@ -34,8 +36,10 @@ public class HumanTaskMain {
         LocalHTWorkItemHandler taskHandler = new LocalHTWorkItemHandler(taskService, knowledgeSession);
         knowledgeSession.getWorkItemManager().registerWorkItemHandler("Human Task", taskHandler);
         ProcessInstance instance = knowledgeSession.createProcessInstance("com.felit.drools.chapter03.humanTask",null);
+        JPAWorkingMemoryDbLogger logger = new JPAWorkingMemoryDbLogger(knowledgeSession);
         knowledgeSession.startProcessInstance(instance.getId());
         knowledgeSession.dispose();
+        logger.dispose();
 
     }
 

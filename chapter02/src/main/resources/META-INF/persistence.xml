@@ -41,10 +41,6 @@
         <class>org.jbpm.task.OnParentAbortAllSubTasksEndStrategy</class>
         <class>org.jbpm.task.OnAllSubTasksEndParentEndStrategy</class>
         <class>org.jbpm.task.User</class>
-        <!-- 审计 -->
-        <class>org.jbpm.process.audit.ProcessInstanceLog</class>
-        <class>org.jbpm.process.audit.NodeInstanceLog</class>
-        <class>org.jbpm.process.audit.VariableInstanceLog</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

@@ -1,0 +1,15 @@
+import com.felit.drools.chapter01.model.Source
+
+rule "print source"
+when
+    $s : Source()
+then
+    System.out.println($s);
+//    retract($s)
+end
+
+rule "confliction"
+when $s: Source()
+then
+     System.out.println("the confliction:" + $s);
+end

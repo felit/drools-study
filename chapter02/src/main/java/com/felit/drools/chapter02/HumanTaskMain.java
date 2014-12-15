@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  */
-public class JbpmMain {
+public class HumanTaskMain {
     public static void main(String args[]) {
         StatefulKnowledgeSession ksession = getSession();
         Map<String, Object> params = new HashMap<String, Object>();
