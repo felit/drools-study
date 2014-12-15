@@ -1,0 +1,14 @@
+package com.felit.drools.chapter01
+import com.felit.drools.chapter01.model.EntityStatus
+import com.felit.drools.chapter01.model.EntityStatus.Status
+rule "timer print"
+dialect "mvel"
+agenda-group "test-timer"
+timer(cron:0/5 * * * * ?)
+when
+   $entity : EntityStatus(count<10)
+then
+   int countNum = $entity.getCount();
+   modify($entity){ setCount(countNum + 1) }
+   System.out.println($entity);
+end

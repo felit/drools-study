@@ -10,6 +10,7 @@ import org.drools.command.Command;
 import org.drools.command.CommandFactory;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.Agenda;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ import java.util.List;
 
 /**
  */
-public class CommandTest {
+public class SourceTest {
 
     protected KnowledgeBase knowledgeBase;
 
@@ -32,6 +33,7 @@ public class CommandTest {
         Source source = new Source();
         source.setName("source name");
         ksession.insert(source);
+        Agenda agenda = ksession.getAgenda();
         ksession.fireAllRules();
 //        Assert.assertEquals(ksession.getObjects().size(),0);
         ksession.dispose();
