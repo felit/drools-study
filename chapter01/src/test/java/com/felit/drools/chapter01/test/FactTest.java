@@ -11,6 +11,7 @@ import org.drools.io.impl.ClassPathResource;
 import org.drools.runtime.Environment;
 import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.WorkingMemoryEntryPoint;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -55,6 +56,11 @@ public class FactTest {
 
         // add the fact to knowledgeSession
         ksession.insert(requirement);
+
+        WorkingMemoryEntryPoint workingMemoryEntryPoint = ksession.getWorkingMemoryEntryPoint("kk");
+        for (WorkingMemoryEntryPoint point : ksession.getWorkingMemoryEntryPoints()) {
+            System.out.println(point);
+        }
         int rulesNum = ksession.fireAllRules();
 
         System.out.println(rulesNum);

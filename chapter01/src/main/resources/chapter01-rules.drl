@@ -1,5 +1,7 @@
 package com.felit.drools.chapter01
 import java.util.Date
+import com.felit.drools.chapter01.action.ActionDemo
+
 declare Requirement
    title: String
    content: String
@@ -17,5 +19,7 @@ then
    // Retraction is the removal of a fact from Working Memory,
    // which means that it will no longer track and match that fact,
    // and any rules that are activated and dependent on that fact will be cancelled.
+   System.out.println(kcontext);
+   System.out.println(com.felit.drools.chapter01.action.ActionDemo.testAction(kcontext));
    retract($r)
 end
