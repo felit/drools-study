@@ -1,0 +1,1 @@
+spring3 + drools5.5.0.Final + jbpm5.4.0.Final
