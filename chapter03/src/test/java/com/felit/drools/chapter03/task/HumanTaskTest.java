@@ -1,30 +1,24 @@
 package com.felit.drools.chapter03.task;
 
-import bitronix.tm.TransactionManagerServices;
 import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
-import org.drools.persistence.jpa.JPAKnowledgeService;
-import org.drools.runtime.Environment;
-import org.drools.runtime.EnvironmentName;
+import org.drools.persistence.info.SessionInfo;
+import org.drools.persistence.info.WorkItemInfo;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.process.ProcessInstance;
 import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.transaction.TransactionManager;
 import java.util.Collections;
+import java.util.List;
 
 /**
  */
-public class HumanTaskTest {
-    private KnowledgeBase knowledgeBase;
+public class HumanTaskTest extends BasicTest {
+
 
     @Test
     public void testProcess() {
@@ -40,39 +34,22 @@ public class HumanTaskTest {
 
     @Test
     public void testProcessInstance() {
-        StatefulKnowledgeSession knowledgeSession = this.loadSession(44);
-        for (int i=32;i<=32;i++ ) {
-            knowledgeSession.getWorkItemManager().completeWorkItem(i, Collections.<String, Object>emptyMap());
+        List<SessionInfo> ksessions = this.emf.createEntityManager().createQuery("From SessionInfo ").getResultList();
+        for (SessionInfo sessionInfo : ksessions) {
+            StatefulKnowledgeSession knowledgeSession = this.loadSession(sessionInfo.getId());
+            List<WorkItemInfo> workItemInfos = this.emf.createEntityManager().createQuery("From WorkItemInfo ").getResultList();
+            for (WorkItemInfo workItemInfo : workItemInfos) {
+                knowledgeSession.getWorkItemManager().completeWorkItem(workItemInfo.getId(), Collections.<String, Object>emptyMap());
+            }
         }
     }
 
 
-    private StatefulKnowledgeSession newSession() {
-        init();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.jbpm.persistence.jpa");
-        TransactionManager tm = TransactionManagerServices.getTransactionManager();
-
-        Environment env = KnowledgeBaseFactory.newEnvironment();
-        env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, emf);
-        env.set(EnvironmentName.TRANSACTION_MANAGER, tm);
-        return JPAKnowledgeService.newStatefulKnowledgeSession(knowledgeBase, null, env);
-    }
-
-    private StatefulKnowledgeSession loadSession(int sessionId) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.jbpm.persistence.jpa");
-        TransactionManager tm = TransactionManagerServices.getTransactionManager();
-
-        Environment env = KnowledgeBaseFactory.newEnvironment();
-        env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, emf);
-        env.set(EnvironmentName.TRANSACTION_MANAGER, tm);
-        return JPAKnowledgeService.loadStatefulKnowledgeSession(sessionId, this.knowledgeBase, null, env);
-    }
-
-    @BeforeTest
-    public void init() {
+    @Override
+    protected void createKnowledgeBase() {
         KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         builder.add(ResourceFactory.newClassPathResource("task-client-server.bpmn"), ResourceType.BPMN2);
         KnowledgeBase kbase = builder.newKnowledgeBase();
-        knowledgeBase = kbase;
+        this.knowledgeBase = kbase;
     }
 }
