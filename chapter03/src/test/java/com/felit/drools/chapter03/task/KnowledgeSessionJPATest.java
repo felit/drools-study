@@ -6,29 +6,37 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.persistence.info.SessionInfo;
-import org.drools.persistence.info.WorkItemInfo;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.testng.annotations.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  *
  */
 public class KnowledgeSessionJPATest extends BasicTest {
+    @Test
     public void test() {
         List<SessionInfo> ksessions = this.emf.createEntityManager().createQuery("From SessionInfo").getResultList();
         for (SessionInfo sessionInfo : ksessions) {
             StatefulKnowledgeSession ksession = this.loadSession(sessionInfo.getId());
-            /*
+                System.out.println(ksession.getId());
+            for (Object object : ksession.getObjects()) {
+                System.out.println(ksession.getId());
+                System.out.println(object);
 
-            List<WorkItemInfo> workItemInfos = this.emf.createEntityManager().createQuery("From WorkItemInfo ").getResultList();
-            for (WorkItemInfo workItemInfo : workItemInfos) {
-                ksession.getWorkItemManager().completeWorkItem(workItemInfo.getId(), Collections.<String, Object>emptyMap());
-            }*/
+            }
         }
-
     }
+
+
+    @Test
+    public void testKsession() {
+        StatefulKnowledgeSession ksession = this.newSession();
+        ksession.insert("test ksession");
+        System.out.println("ksession.getId():" + ksession.getId());
+    }
+
 
     @Override
     protected void createKnowledgeBase() {
