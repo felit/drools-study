@@ -51,6 +51,7 @@ when
     not Alarm()
     not Sprinkler(on == true)
 then
+    insertLogical()
     System.out.println("Everything is ok");
 end
 

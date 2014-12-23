@@ -3,7 +3,6 @@ package com.felit.drools.chapter01.test;
 import com.felit.drools.chapter01.model.monitor.Fire;
 import com.felit.drools.chapter01.model.monitor.Room;
 import com.felit.drools.chapter01.model.monitor.Sprinkler;
-import org.drools.ClassObjectFilter;
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.ResourceType;
 import org.drools.io.impl.ClassPathResource;
