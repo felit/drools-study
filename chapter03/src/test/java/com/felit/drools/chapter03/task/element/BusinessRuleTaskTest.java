@@ -18,8 +18,8 @@ public class BusinessRuleTaskTest extends BasicTest {
     @Test
     public void test() {
         StatefulKnowledgeSession ksession = this.newSession();
-        ksession.startProcess(BUSINESS_PROESS_ID);
         ksession.insert(new RuleDomain());
+        ksession.startProcess(BUSINESS_PROESS_ID);
         ksession.fireAllRules();
     }
 
