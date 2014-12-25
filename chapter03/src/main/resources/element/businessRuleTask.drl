@@ -5,9 +5,20 @@ import com.felit.drools.chapter03.task.element.model.RuleDomain
 rule "test businuess rule"
 ruleflow-group "testRuleflowGroup"
 when
-  RuleDomain()
+   $r: RuleDomain()
 then
   System.out.println("hello business ruleflow group");
+  System.out.println($r);
+end
+
+rule "test business rule and service"
+ruleflow-group "testRuleflowGroup"
+when
+$r : RuleDomain() from RuleDomain.getRuleDomains()
+then
+  System.out.println("from test business rule and service");
+  System.out.println($r);
+  System.out.println("\n");
 end
 
 rule "test other busidness rule"
