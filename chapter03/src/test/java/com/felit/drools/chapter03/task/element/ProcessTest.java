@@ -28,7 +28,7 @@ public class ProcessTest extends BasicTest {
     @Override
     protected void createKnowledgeBase() {
         KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        builder.add(ResourceFactory.newClassPathResource("process.bpmn"), ResourceType.BPMN2);
+        builder.add(ResourceFactory.newClassPathResource("element/process.bpmn"), ResourceType.BPMN2);
         KnowledgeBase kbase = builder.newKnowledgeBase();
         this.knowledgeBase = kbase;
     }
