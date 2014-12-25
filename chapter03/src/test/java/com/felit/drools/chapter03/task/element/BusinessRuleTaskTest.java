@@ -21,6 +21,7 @@ public class BusinessRuleTaskTest extends BasicTest {
         ksession.insert(new RuleDomain("test0001"));
         ksession.startProcess(BUSINESS_PROESS_ID);
         ksession.fireAllRules();
+        System.out.println("ksession.getObjects().size():" + ksession.getObjects().size());
     }
 
     @Override
