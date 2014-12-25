@@ -1,0 +1,19 @@
+package com.felit.drools.chapter03.task.element
+import org.drools.runtime.process.WorkflowProcessInstance
+import com.felit.drools.chapter03.task.element.model.RuleDomain
+
+rule "test businuess rule"
+ruleflow-group "testRuleflowGroup"
+when
+  RuleDomain()
+then
+  System.out.println("hello business ruleflow group");
+end
+
+rule "test other busidness rule"
+ruleflow-group "not-the-ruleflow-group"
+when
+ RuleDomain()
+then
+ System.out.println("print other rulfeflow group");
+end
