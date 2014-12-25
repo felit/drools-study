@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:tns="http://www.jboss.org/drools"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <process id="com.felit.drools.chapter03.task.element.subProcess" isExecutable="true" isClosed="false">
+        <startEvent id="start"/>
+        <subProcess id="subProcess">
+            <startEvent id="sub-start">
+                <auditing/>
+                <monitoring/>
+            </startEvent>
+            <scriptTask id="sub-scriptTask">
+                <script>
+                    System.out.println("script task");
+                </script>
+            </scriptTask>
+            <endEvent id="sub-end"/>
+            <sequenceFlow sourceRef="sub-start" targetRef="sub-scriptTask"/>
+            <sequenceFlow sourceRef="sub-scriptTask" targetRef="sub-end"/>
+        </subProcess>
+        <endEvent id="end"/>
+        <sequenceFlow sourceRef="start" targetRef="subProcess"/>
+        <sequenceFlow sourceRef="subProcess" targetRef="end"/>
+    </process>
+</definitions>
