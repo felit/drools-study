@@ -27,8 +27,12 @@
         <exclusiveGateway id="hello" gatewayDirection="Converging"/>
         <endEvent id="end"/>
         <sequenceFlow sourceRef="start" targetRef="condition"/>
-        <sequenceFlow sourceRef="condition" targetRef="say-hello"/>
-        <sequenceFlow sourceRef="condition" targetRef="say-world"/>
+        <sequenceFlow sourceRef="condition" targetRef="say-hello">
+            <conditionExpression xsi:type="tFormalExpression">return x=="First";</conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow sourceRef="condition" targetRef="say-world">
+            <conditionExpression xsi:type="tFormalExpression">return x=="Second";</conditionExpression>
+        </sequenceFlow>
         <sequenceFlow sourceRef="say-hello" targetRef="hello"/>
         <sequenceFlow sourceRef="say-world" targetRef="hello"/>
         <sequenceFlow sourceRef="hello" targetRef="end"/>
