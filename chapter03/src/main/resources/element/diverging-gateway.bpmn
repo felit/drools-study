@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools"
+             targetNamespace="http://www.jboss.org/drools"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <process id="com.felit.drools.chapter03.task.element.divergingGateway">
+        <startEvent id="start"/>
+        <eventBasedGateway id="condition" gatewayDirection="Diverging"/>
+        <scriptTask id="say-hello">
+            <script>
+                System.out.println("hello");
+            </script>
+        </scriptTask>
+        <scriptTask id="say-world">
+            <script>
+                System.out.println("world");
+            </script>
+        </scriptTask>
+        <!--<scriptTask id="hello">
+            <script>
+                System.out.println("result");
+            </script>
+        </scriptTask>-->
+        <exclusiveGateway id="hello" gatewayDirection="Converging"/>
+        <endEvent id="end"/>
+        <sequenceFlow sourceRef="start" targetRef="condition"/>
+        <sequenceFlow sourceRef="condition" targetRef="say-hello"/>
+        <sequenceFlow sourceRef="condition" targetRef="say-world"/>
+        <sequenceFlow sourceRef="say-hello" targetRef="hello"/>
+        <sequenceFlow sourceRef="say-world" targetRef="hello"/>
+        <sequenceFlow sourceRef="hello" targetRef="end"/>
+    </process>
+</definitions>
