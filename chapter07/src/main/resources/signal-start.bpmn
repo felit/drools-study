@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:tns="http://www.jboss.org/drools"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd
+             http://www.jboss.org/drools http://www.jboss.org/drools/drools.xsd"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI">
+    <process id="com.felit.drools.chapter07.SignalStartTest">
+        <startEvent id="start">
+            <signalEventDefinition signalRef="my-signal"/>
+        </startEvent>
+        <scriptTask id="script">
+            <script>
+                System.out.println("script");
+            </script>
+        </scriptTask>
+        <endEvent id="end"></endEvent>
+        <sequenceFlow sourceRef="start" targetRef="script"/>
+        <sequenceFlow sourceRef="script" targetRef="end"/>
+    </process>
+    </definitions>
