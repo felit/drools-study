@@ -4,6 +4,7 @@ import bitronix.tm.TransactionManagerServices;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
@@ -60,6 +61,11 @@ public abstract class BasicTest {
     protected void createKnowledgeBase() {
         this.kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         this.addResource();
+        if (this.kbuilder.getErrors().size() > 0) {
+            for (KnowledgeBuilderError error : this.kbuilder.getErrors()) {
+                System.out.println(error.getResource() + ":" + (error.getLines().length > 0 ? error.getLines()[0] : "null") + "->" + error.getMessage());
+            }
+        }
         KnowledgeBase kbase = this.kbuilder.newKnowledgeBase();
         this.knowledgeBase = kbase;
     }
