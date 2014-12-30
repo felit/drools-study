@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:tns="http://www.jboss.org/drools"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd
+             http://www.jboss.org/drools http://www.jboss.org/drools/drools.xsd">
+    <process id="com.felit.drools.chapter07.IntermediateCatchEventConditionTest"
+             name="IntermediateCatchEventConditionTest">
+        <!-- nodes -->
+        <startEvent id="start"></startEvent>
+        <intermediateCatchEvent id="event" name="person-event">
+            <conditionalEventDefinition>
+                <condition xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule">
+                    com.felit.drools.chapter07.model.Person(name == "Jack");
+                </condition>
+            </conditionalEventDefinition>
+        </intermediateCatchEvent>
+        <scriptTask id="script">
+            <script>
+                System.out.println("Triggered....");
+            </script>
+        </scriptTask>
+        <endEvent id="end">
+            <terminateEventDefinition/>
+        </endEvent>
+        <!-- connections -->
+        <sequenceFlow sourceRef="start" targetRef="event"/>
+        <sequenceFlow sourceRef="event" targetRef="script"/>
+        <sequenceFlow sourceRef="script" targetRef="end"/>
+    </process>
+</definitions>
